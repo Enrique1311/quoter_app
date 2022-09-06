@@ -12,7 +12,7 @@ const Form = props => {
         <View style={styles.inputContent}>
           <Text style={styles.inputSymbol}>$</Text>
           <TextInput
-            placeholder="Interés"
+            placeholder="Capital"
             keyboardType="numeric"
             style={styles.input}
             onChange={e => setCapital(e.nativeEvent.text)}
@@ -55,8 +55,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: colors.SECONDARY,
     paddingHorizontal: 30,
-    borderRadius: 30,
-    height: 160,
+    borderRadius: 20,
+    height: 150,
     width: '90%',
     justifyContent: 'center',
   },
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
     color: colors.WHITE,
   },
   pickerContainer: {
-    width: '100%',
+    alignSelf: 'center',
+    width: '104%',
     height: 45,
     justifyContent: 'center',
     alignItems: 'center',

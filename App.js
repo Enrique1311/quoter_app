@@ -18,18 +18,18 @@ const App = () => {
 
   const calculate = () => {
     reset();
-    if (!capital) {
-      setErrorMessage('No fue ingresado el capital');
-    } else if (!interest) {
-      setErrorMessage('No fue ingresado el interés');
-    } else if (!months) {
-      setErrorMessage('No fue ingresado el plazo');
-    } else {
+    if (!capital.match(/^[0-9]+$/)) {
+      setErrorMessage('¡El capital debe ser un valor numérico sin centavos!');
+    } else if (!interest.match(/^\d{1,3}(\.\d{1,3})?$/)) {
+      setErrorMessage(
+        '¡El interés debe ser un valor numérico con hasta tres decimales separado por un punto!',
+      );
+    } else if (months) {
       const i = interest / 100;
       const fee = capital / ((1 - Math.pow(i + 1, -months)) / i);
       setTotal({
-        monthlyFee: fee.toFixed(2).replace('.', ','),
-        totalPayable: (fee * months).toFixed(2).replace('.', ','),
+        monthlyFee: fee.toFixed(2),
+        totalPayable: (fee * months).toFixed(2),
       });
     }
   };
@@ -44,12 +44,13 @@ const App = () => {
       <StatusBar barStyle="light-content" backgroundColor={colors.PRIMARY} />
       <SafeAreaView style={styles.safe}>
         <View style={styles.background} />
-        <Text style={styles.title}>Cotizador</Text>
+        <Text style={styles.title}>Cotizador de préstamos</Text>
         <Form
           setCapital={setCapital}
           setInterest={setInterest}
           setMonths={setMonths}
           months={months}
+          setErrorMessage={setErrorMessage}
         />
       </SafeAreaView>
       <Result
@@ -59,7 +60,7 @@ const App = () => {
         months={months}
         total={total}
       />
-      <Footer calculate={calculate} reset={reset} />
+      <Footer />
     </>
   );
 };
@@ -68,14 +69,14 @@ export default App;
 
 const styles = StyleSheet.create({
   safe: {
-    height: 230,
+    height: 220,
     alignItems: 'center',
   },
   background: {
     width: '100%',
-    height: 150,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
+    height: 140,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
     backgroundColor: colors.PRIMARY,
     position: 'absolute',
     zIndex: -1,

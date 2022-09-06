@@ -6,7 +6,7 @@ import colors from '../utilities/colors';
 const Result = props => {
   const {errorMessage, capital, interest, months, total} = props;
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {total && (
         <View style={styles.result}>
           <Text style={styles.title}>Resumen</Text>
@@ -35,6 +35,7 @@ export default Result;
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
+    marginBottom: 85,
   },
   result: {
     margin: 10,
@@ -43,15 +44,16 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 10,
   },
   error: {
+    marginHorizontal: 10,
     textAlign: 'center',
     color: 'red',
     fontWeight: 'bold',
-    fontSize: 18,
-    marginTop: 80,
+    fontSize: 16,
+    marginTop: 5,
   },
 });
