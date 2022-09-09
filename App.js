@@ -11,16 +11,23 @@ const App = () => {
   const [months, setMonths] = useState(null);
   const [total, setTotal] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [resetAll, setResetAll] = useState(false);
 
   useEffect(() => {
     capital && interest && months ? calculate() : reset();
   }, [capital, interest, months]);
 
+  useEffect(() => {
+    if (resetAll === true) {
+      deleteAll();
+    }
+  }, [resetAll]);
+
   const calculate = () => {
     reset();
     if (!capital.match(/^[0-9]+$/)) {
       setErrorMessage('¡El capital debe ser un valor numérico sin centavos!');
-    } else if (!interest.match(/^\d{1,3}(\.\d{1,3})?$/)) {
+    } else if (!interest.match(/^\d{1,9}(\.\d{1,3})?$/)) {
       setErrorMessage(
         '¡El interés debe ser un valor numérico con hasta tres decimales separado por un punto!',
       );
@@ -37,6 +44,13 @@ const App = () => {
   const reset = () => {
     setErrorMessage('');
     setTotal(null);
+  };
+
+  const deleteAll = () => {
+    setCapital(null);
+    setInterest(null);
+    setMonths(null);
+    setResetAll(false);
   };
 
   return (
@@ -60,7 +74,7 @@ const App = () => {
         months={months}
         total={total}
       />
-      <Footer />
+      <Footer setResetAll={setResetAll} />
     </>
   );
 };

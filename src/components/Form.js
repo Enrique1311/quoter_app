@@ -30,10 +30,10 @@ const Form = props => {
       </View>
       <View style={styles.pickerContainer}>
         <Picker
-          prompt="Selecciona el plazo"
           selectedValue={months}
           style={styles.pickerContent}
           onValueChange={value => setMonths(value)}>
+          <Picker.Item label="Selecciona el plazo" value={null} />
           <Picker.Item label="3 meses" value={3} />
           <Picker.Item label="6 meses" value={6} />
           <Picker.Item label="12 meses" value={12} />

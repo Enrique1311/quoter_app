@@ -2,12 +2,14 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import colors from '../utilities/colors';
 
-const Footer = () => {
+const Footer = ({setResetAll}) => {
   return (
     <View style={styles.footer}>
-      <Text style={styles.text}>
-        El cálculo se hará automáticamente cuando completes todos los campos.
-      </Text>
+      <TouchableOpacity
+        style={styles.touchableOpacity}
+        onPress={() => setResetAll(true)}>
+        <Text style={styles.text}>Reset</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -21,16 +23,25 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: '100%',
     backgroundColor: colors.PRIMARY,
-    height: 85,
+    height: 80,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
   text: {
-    textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     color: colors.WHITE,
+  },
+  touchableOpacity: {
+    width: '60%',
+    height: 50,
+    backgroundColor: colors.SECONDARY,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: colors.WHITE,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
